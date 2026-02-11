@@ -1,16 +1,18 @@
-import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 def test_form_validation():
     driver = webdriver.Edge()
-    driver.get("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
+    driver.get(
+        'https://bonigarcia.dev/selenium-webdriver-java/data-types.html'
+    )
     driver.fullscreen_window()
     wait = WebDriverWait(driver, 10)
 
-
+    # Заполняем поля формы
     wait.until(
         EC.visibility_of_element_located((By.NAME, 'first-name'))
     ).send_keys('Иван')
@@ -39,36 +41,33 @@ def test_form_validation():
         EC.visibility_of_element_located((By.NAME, 'company'))
     ).send_keys('SkyPro')
 
-
-
+    # Нажимаем кнопку отправки
     submit_button = wait.until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "button.btn-outline-primary"))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR,
+             'button.btn-outline-primary')
         )
-
+    )
     wait.until(EC.visibility_of(submit_button))
     submit_button.click()
 
-    def get_border_color(element):
-        return element.value_of_css_property('border-color').lower()
-
-    zip_code = wait.until(
-        EC.visibility_of_element_located((By.ID,'zip-code')
-        )
+    # Проверка: Zip code должен быть красным (alert-danger)
+    zip_code_alert = wait.until(
+        EC.visibility_of_element_located((By.ID, 'zip-code'))
     )
-    zip_color = get_border_color(zip_code)
-    assert zip_color == 'rgb(245, 194, 199)'
+    zip_classes = zip_code_alert.get_attribute('class')
+    assert 'alert-danger' in zip_classes
 
-    green_fields = [
+    # Проверка: остальные поля должны быть зелёными (alert-success)
+    success_fields = [
         'first-name', 'last-name', 'address', 'city', 'country',
         'e-mail', 'phone', 'job-position', 'company'
     ]
-
-    expected_green = 'rgb(186, 219, 204)'
-
-    for field_name in green_fields:
-        field = wait.until(EC.visibility_of_element_located((By.ID,field_name)))
-        field_color = get_border_color(field)
-        assert field_color == expected_green
-
+    for field_id in success_fields:
+        field_alert = wait.until(
+            EC.visibility_of_element_located((By.ID, field_id))
+        )
+        field_classes = field_alert.get_attribute('class')
+        assert 'alert-success' in field_classes
 
     driver.quit()

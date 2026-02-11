@@ -1,15 +1,15 @@
-import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 
 def test_online_shop():
     driver = webdriver.Firefox()
     driver.get('https://www.saucedemo.com/')
     wait = WebDriverWait(driver, 10)
 
-    # Авторизация:
+    # Авторизация
     wait.until(
         EC.visibility_of_element_located((By.ID, 'user-name'))
     ).send_keys('standard_user')
@@ -20,32 +20,40 @@ def test_online_shop():
         EC.element_to_be_clickable((By.ID, 'login-button'))
     ).click()
 
-    # Добавление товаров в корзину:
+    # Добавление товаров в корзину
     wait.until(
-        EC.visibility_of_element_located((By.ID, 'add-to-cart-sauce-labs-backpack'))
+        EC.visibility_of_element_located(
+            (By.ID, 'add-to-cart-sauce-labs-backpack')
+        )
     ).click()
     wait.until(
-        EC.visibility_of_element_located((By.ID,
-    'add-to-cart-sauce-labs-bolt-t-shirt'))
+        EC.visibility_of_element_located(
+            (By.ID, 'add-to-cart-sauce-labs-bolt-t-shirt')
+        )
     ).click()
 
     sauce_labs_onesie = wait.until(
         EC.presence_of_element_located(
-        (By.ID,'add-to-cart-sauce-labs-onesie'))
+            (By.ID, 'add-to-cart-sauce-labs-onesie')
+        )
     )
     driver.execute_script("arguments[0].scrollIntoView();", sauce_labs_onesie)
     wait.until(
-        EC.element_to_be_clickable((By.ID,'add-to-cart-sauce-labs-onesie'))
+        EC.element_to_be_clickable(
+            (By.ID, 'add-to-cart-sauce-labs-onesie')
+        )
     ).click()
 
-    # Переход в корзину:
+    # Переход в корзину
     wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR,'a.shopping_cart_link'))
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, 'a.shopping_cart_link')
+        )
     ).click()
 
-    # Оформление заказа:
+    # Оформление заказа
     checkout = wait.until(
-        EC.presence_of_element_located((By.ID,'checkout'))
+        EC.presence_of_element_located((By.ID, 'checkout'))
     )
     driver.execute_script("arguments[0].scrollIntoView();", checkout)
     wait.until(
@@ -62,13 +70,13 @@ def test_online_shop():
         EC.visibility_of_element_located((By.ID, 'postal-code'))
     ).send_keys('350000')
     wait.until(
-        EC.element_to_be_clickable((By.ID,'continue'))
+        EC.element_to_be_clickable((By.ID, 'continue'))
     ).click()
 
-    # Проверка итоговой суммы:
+    # Проверка итоговой суммы
     total = wait.until(
         EC.presence_of_element_located(
-            (By.CSS_SELECTOR,'div.summary_total_label')
+            (By.CSS_SELECTOR, 'div.summary_total_label')
         )
     )
     driver.execute_script("arguments[0].scrollIntoView();", total)
@@ -76,15 +84,4 @@ def test_online_shop():
     numeric_value = total_text.replace("Total: ", "").replace("$", "")
     assert numeric_value == '58.29'
 
-
     driver.quit()
-
-
-
-
-
-
-
-
-
-
