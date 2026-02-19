@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class MainPage:
+    cart_button_selector = 'a.shopping_cart_link'
 
     def __init__(self,driver):
         self.driver = driver
@@ -23,6 +24,8 @@ class MainPage:
 
     def go_to_cart(self):
         cart_button = self.wait.until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, 'a.shopping_cart_link'))
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, MainPage.cart_button_selector)
+            )
         )
         cart_button.click()

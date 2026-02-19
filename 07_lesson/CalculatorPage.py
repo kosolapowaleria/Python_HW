@@ -67,6 +67,9 @@ class CalculatorPage:
         )
         return element.text
 
+    def calculate_result(self):
+        self._press_equals()
+
     def _press_digit(self, digit):
         locator = (
             By.XPATH,

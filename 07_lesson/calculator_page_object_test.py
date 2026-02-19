@@ -19,7 +19,7 @@ def test_slow_calculator(driver):
     calculator_page = CalculatorPage(driver)
     calculator_page.fill_delay_input('45')
     calculator_page.enter_expressions('7+8')
-    calculator_page._press_equals()
+    calculator_page.calculate_result()
     WebDriverWait(driver, 60).until(
         EC.text_to_be_present_in_element(
             calculator_page._result_display, '15')

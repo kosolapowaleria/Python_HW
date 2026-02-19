@@ -4,25 +4,13 @@ from pages_online_shop.CartPage import CartPage
 from pages_online_shop.OrderPage import OrderPage
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 
 @pytest.fixture()
 def driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--incognito")
-    chrome_options.add_argument('disable-notifications')
-    chrome_options.add_argument("--disable-extensions")
-    prefs = {
-        "credentials_enable_service": False,
-        "profile.password_manager_enabled": False,
-        "safebrowsing.enabled": False
-    }
-    chrome_options.add_experimental_option("prefs", prefs)
-
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Firefox()
     driver.maximize_window()
-    driver.get(' https://www.saucedemo.com/')
+    driver.get('https://www.saucedemo.com/')
     yield driver
     driver.quit()
 

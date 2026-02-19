@@ -9,9 +9,9 @@ class CartPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
 
-    def checkout(self, locator=(By.ID, 'checkout')):
+    def checkout(self):
         element = self.wait.until(
-            EC.element_to_be_clickable(locator)
+            EC.element_to_be_clickable((By.ID, 'checkout'))
         )
         if not element.is_displayed():
             self.driver.execute_script(
