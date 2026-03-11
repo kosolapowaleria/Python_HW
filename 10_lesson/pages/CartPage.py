@@ -41,7 +41,7 @@ class CartPage:
         3. Выполняет клик по кнопке.
 
         :raises TimeoutException: если кнопка не стала кликабельной
-         в течение 20 секунд
+         в течение 20 секунд.
 
         """
         element = self.wait.until(
@@ -69,7 +69,7 @@ class CartPage:
         :return: list[dict] — список словарей вида
         {'name': str, 'price': str}
         :raises TimeoutException: если контейнеры с товарами не появились
-        в течение 20 секунд
+        в течение 20 секунд.
 
         """
         self.driver.execute_script(

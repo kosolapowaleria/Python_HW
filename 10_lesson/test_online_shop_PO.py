@@ -10,7 +10,9 @@ import allure
 @pytest.fixture()
 def driver():
     """
+
     Фикстура для инициализации и завершения работы драйвера
+
     """
     driver = webdriver.Firefox()
     driver.maximize_window()

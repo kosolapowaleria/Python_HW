@@ -23,6 +23,7 @@ class OrderPage:
         Конструктор класс OrderPage.
 
         :param driver: Webdriver — объект драйвера Selenium
+
         """
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -44,7 +45,7 @@ class OrderPage:
         :param last_name: str — фамилия покупателя
         :param postal_code: str — почтовый индекс покупателя
         :raises TimeoutException: если какое‑либо поле не стало кликабельным
-        в течение 10 секунд
+        в течение 10 секунд.
 
         """
 
@@ -78,7 +79,8 @@ class OrderPage:
         3. Выполняет клик по кнопке.
 
         :raises TimeoutException: если кнопка не стала кликабельной
-        в течение 10 секунд
+        в течение 10 секунд.
+
         """
         continue_btn = self.wait.until(
             EC.element_to_be_clickable((By.ID, 'continue'))
@@ -103,9 +105,9 @@ class OrderPage:
 
         :return: str — итоговая сумма заказа в формате '$XX.XX'
         :raises TimeoutException: если элемент с суммой не появился
-        в течение 10 секунд
+        в течение 10 секунд.
         :raises IndexError: если формат текста суммы
-        не соответствует ожидаемому
+        не соответствует ожидаемому.
 
         """
         total_element = self.wait.until(

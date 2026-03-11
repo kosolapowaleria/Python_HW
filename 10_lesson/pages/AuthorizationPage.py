@@ -6,18 +6,24 @@ import allure
 
 class AuthorizationPage:
     """
+
     Класс работы со страницей авторизации.
 
     Предоставляет методы взаимодействия со страницей:
-    ввод логина и пароля, нажатие кнопки входа.
+
+    1. Ввод логина.
+    2. Ввод пароля.
+    3. Нажатие кнопки входа.
 
     """
 
     def __init__(self, driver):
         """
+
         Конструктор класса AuthorizationPage
 
         :param driver: Webdriver — объект драйвера Selenium
+
         """
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -34,7 +40,7 @@ class AuthorizationPage:
 
         :param login: str — логин пользователя для авторизации
         :raises TimeoutException: если поле логина не появилось
-        в течение 10 секунд
+        в течение 10 секунд.
 
         """
         login_field = self.wait.until(
@@ -55,7 +61,7 @@ class AuthorizationPage:
 
         :param password: str - пароль пользователя для авторизации
         :raises TimeoutException: если поле пароля не стало
-        кликабельным в течение 10 секунд
+        кликабельным в течение 10 секунд.
 
         """
         password_field = self.wait.until(
@@ -73,7 +79,7 @@ class AuthorizationPage:
         1. Ожидает, когда кнопка станет кликабельной.
         2. Выполняет нажатие на кнопку.
         :raises TimeoutException: если кнопка входа не стала кликабельной
-        в течение 10 секунд
+        в течение 10 секунд.
 
         """
         login_btn = self.wait.until(
