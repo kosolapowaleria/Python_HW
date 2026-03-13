@@ -78,7 +78,7 @@ pytest 10_lesson/test_online_shop_PO.py --alluredir=./allure-results
 
 1. После завершения тестов, чтобы посмотреть отчёт, выполните команду:
 ```bash
-allure.serve ./allure-results
+allure serve ./allure-results
 ```
 
 Эта команда запустит локальный сервер и откроет отчёт в браузере.
